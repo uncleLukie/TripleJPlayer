@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import time
 import random
+import threading
 
 
 class SongFetcher:
@@ -14,6 +15,7 @@ class SongFetcher:
         # Create a new instance of the Chrome driver
         self.driver = webdriver.Chrome(options=options)
 
+        self.url = url
         # Navigate to a web page
         self.driver.get(url)
 
@@ -37,13 +39,18 @@ class SongFetcher:
             return None, None, None
 
     def run(self):
-        while True:
-            time.sleep(random.uniform(5, 8))
-            title, artist, album = self.get_song_info()
-            if title and artist and album:
-                print(f"Now playing: {title} by {artist} in release {album}")
-            else:
-                print("Unable to retrieve song info")
+        def run_thread():
+            while True:
+                time.sleep(random.uniform(2, 4))
+                title, artist, album = self.get_song_info()
+                if title and artist and album:
+                    print(f"Now playing: {title} by {artist} in release {album}")
+                else:
+                    print("Unable to retrieve song info")
+
+        t = threading.Thread(target=run_thread)
+        t.daemon = True
+        t.start()
 
     def __del__(self):
         self.driver.quit()
