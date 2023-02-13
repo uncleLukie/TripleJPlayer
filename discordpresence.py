@@ -1,16 +1,30 @@
-import discord
+from pypresence import Presence
 
 
-class DiscordStatus:
-    def __init__(self, client_id, token):
+class DiscordPresence:
+
+    def __init__(self, client_id):
         self.client_id = client_id
-        self.token = token
-        self.client = discord.Client()
+        self.client = Presence(client_id, pipe=0)
+        self.client.connect()
 
-    async def update(self, song_title, song_artist, song_album):
-        await self.client.start(self.token)
-        game = discord.Game(name=f"{song_title} by {song_artist}")
-        await self.client.change_presence(activity=game)
+    def update_song_activity(self, song_title, song_artist):
+        details = f"{song_title}"
+        state = f"by {song_artist}"
+        self.client.update(details=details,
+                           state=state,
+                           large_image="app_icon",
+                           buttons=[{"label": "Download on GitHub", "url": "https://github.com/unclelukie/TripleJPlayer"}]
+                           )
+
+    def update_break_activity(self, heading):
+        details = heading
+        state = f"on the Js"
+        self.client.update(details=details,
+                           state=state,
+                           large_image="app_icon",
+                           buttons=[{"label": "Download on GitHub", "url": "https://github.com/unclelukie/TripleJPlayer"}]
+                           )
 
     def __del__(self):
         self.client.close()

@@ -27,32 +27,21 @@ class SongFetcher:
             song_artist_element = song_wrapper.find_element(By.CLASS_NAME, "Song_songArtist__sD5_H")
             song_artist = song_artist_element.text
 
-            song_album_element = song_wrapper.find_element(By.CLASS_NAME, "Song_songRelease__jYe_C")
-            song_album = song_album_element.text
+            # song_album_element = song_wrapper.find_element(By.CLASS_NAME, "Song_songRelease__jYe_C")
+            # song_album = song_album_element.text
 
-            #TODO: add image album url--not functional, maybe selenium headless does not retrieve images?
-            #song_img_element = song_wrapper.find_element(By.CLASS_NAME, "Image_image__ZCYel Song_songImg__CZsrK")
-            #song_img_url = song_img_element.get_attribute("src")
+            # TODO: add image album url--not functional, maybe selenium headless does not retrieve images?
+            # song_img_element = song_wrapper.find_element(By.CLASS_NAME, "Image_image__ZCYel Song_songImg__CZsrK")
+            # song_img_url = song_img_element.get_attribute("src")
 
-            return song_title, song_artist, song_album
+            return song_title, song_artist
 
         except:
-            return None, None, None
+            return None, None
 
-    # def run(self):
-    #     def run_thread():
-    #         while True:
-    #             time.sleep(random.uniform(2, 4))
-    #             title, artist, album = self.get_song_info()
-    #             if title and artist and album:
-    #                 print(f"Now playing: {title} by {artist} in release {album}")
-    #                 #print(f"ImageURL: {imgurl}")
-    #             else:
-    #                 print("Unable to retrieve song info")
-    #
-    #     t = threading.Thread(target=run_thread)
-    #     t.daemon = True
-    #     t.start()
+    def get_break_info(self):
+        heading = self.driver.find_element(By.CLASS_NAME, "Heading_heading__XLh_j")
+        return heading
 
     def __del__(self):
         self.driver.close()
