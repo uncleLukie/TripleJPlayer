@@ -23,8 +23,8 @@ def run_thread():
             print(f"Now playing: {title} by {artist}")
             drpc.update_song_activity(title, artist)
         else:
-            heading = fetcher.get_break_info()
-            drpc.update_break_activity(heading)
+            #heading = fetcher.get_break_info()
+            #drpc.update_break_activity(heading)
             print("Unable to retrieve song info")
 
 
