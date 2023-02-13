@@ -2,8 +2,8 @@ import random
 import threading
 import time
 import webview
-import songfetcher
 import atexit
+import songfetcher
 import discordpresence
 
 url = "https://www.abc.net.au/listenlive/triplej"

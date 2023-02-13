@@ -1,0 +1,7 @@
+selenium
+pywebview
+pypresence
+atexit
+threading
+random
+time
