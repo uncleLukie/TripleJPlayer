@@ -15,3 +15,6 @@ Uses Python 3.11, Selenium, webview, and pypresence
 - Clone the repo
 - pip install -r requirements.txt
 - python start.py
+
+## Want to contribute?
+Check out the issues, I've listed some of the work that needs to be done <3
