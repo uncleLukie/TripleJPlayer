@@ -18,3 +18,4 @@ Uses Python 3.11, Selenium, webview, and pypresence
 
 ## Want to contribute?
 Check out the issues, I've listed some of the work that needs to be done <3
+I also need people to test it out and report bugs, of course.
