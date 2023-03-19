@@ -1,19 +1,17 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+from webdriver_manager.chrome import ChromeDriverManager
+import time
 
 class SongFetcher:
     def __init__(self, url):
-        # Create options for running in headless mode
-        options = Options()
-        options.add_argument("--headless")
-
-        # Create a new instance of the Chrome driver
-        self.driver = webdriver.Chrome(options=options)
-
         self.url = url
-        # Navigate to a web page
+        self.play_button_clicked = False
+        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+        self.driver.set_window_size(480, 640)
         self.driver.get(url)
 
     def get_song_info(self):
@@ -39,10 +37,25 @@ class SongFetcher:
         except:
             return None, None
 
-    def get_break_info(self):
-        heading = self.driver.find_element(By.CLASS_NAME, "Heading_heading__XLh_j")
-        return heading
+    def get_program_name(self):
+        try:
+            program_name = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, ".ProgramInfo_programName__2ceHG"))
+            )
+            return program_name.text
+        except TimeoutException:
+            print("Program name not found")
+    def press_play_button(self):
+        try:
+            play_button = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, ".jw-icon-playback"))
+            )
+            if play_button.get_attribute("class").find("jw-icon-play") != -1 and not self.play_button_clicked:
+                play_button.click()
+                self.play_button_clicked = True
+        except TimeoutException:
+            print("Play button not found")
 
     def __del__(self):
-        self.driver.close()
-        self.driver.quit()
+        if hasattr(self, "driver"):
+            self.driver.close()

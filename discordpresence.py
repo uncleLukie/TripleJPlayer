@@ -18,7 +18,7 @@ class DiscordPresence:
                            )
 
     def update_break_activity(self, heading):
-        details = heading
+        details = f"{heading}"
         state = f"on the Js"
         self.client.update(details=details,
                            state=state,
