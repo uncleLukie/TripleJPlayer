@@ -1,5 +1,5 @@
 # notice
-doesn't work anymore, https://github.com/uncleLukie/TripleJPlayer for a better version
+doesn't work anymore, https://github.com/uncleLukie/jaybird for a better version
 
 # Triple J Player
 
