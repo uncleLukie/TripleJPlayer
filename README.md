@@ -1,3 +1,6 @@
+# notice
+doesn't work anymore, https://github.com/uncleLukie/TripleJPlayer for a better version
+
 # Triple J Player
 
 A discord rich Triple J radio player.
